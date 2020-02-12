@@ -14,6 +14,8 @@
 // limitations under the License.
 
 import 'dart:ui' show TextDirection;
+
+import 'package:charts_common/common.dart' as common;
 import 'package:flutter/material.dart'
     show
         AnimationController,
@@ -21,15 +23,15 @@ import 'package:flutter/material.dart'
         State,
         TickerProviderStateMixin,
         Widget;
-import 'package:charts_common/common.dart' as common;
 import 'package:flutter/widgets.dart'
     show Directionality, LayoutId, CustomMultiChildLayout;
+
+import 'base_chart.dart' show BaseChart;
 import 'behaviors/chart_behavior.dart'
     show BuildableBehavior, ChartBehavior, ChartStateBehavior;
-import 'base_chart.dart' show BaseChart;
 import 'chart_container.dart' show ChartContainer;
-import 'chart_state.dart' show ChartState;
 import 'chart_gesture_detector.dart' show ChartGestureDetector;
+import 'chart_state.dart' show ChartState;
 import 'widget_layout_delegate.dart';
 
 class BaseChartState<D> extends State<BaseChart<D>>
@@ -68,7 +70,9 @@ class BaseChartState<D> extends State<BaseChart<D>>
 
   @override
   void requestRebuild() {
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
